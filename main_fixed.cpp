@@ -1,27 +1,4 @@
-/*
-PROJECT: Movie Ticket Booking System
-LANGUAGE: C++17
 
-CHECKLIST COVERAGE
-1. Minimum 5 classes: Movie, User, Customer, Admin, Booking, Payment, MovieBookingSystem.
-2. Constructors and destructors: provided in classes.
-3. Inheritance and polymorphism: Customer/Admin derive from abstract User; role() is virtual.
-4. Dynamic memory: unique_ptr and make_unique are used for users and movies.
-5. File persistence: movies.txt and bookings.txt are loaded/saved automatically.
-6. Add/Search/Update/Delete: movie CRUD and booking search/update/cancel are provided.
-7. Main transaction: ticket booking validates seats, processes payment, updates seats, and saves.
-8. Use Case Diagram: included in README.md.
-9. Class Diagram: included in README.md.
-10. Two Sequence Diagrams: included in README.md.
-11. 15 test cases: included in test_cases.md.
-12. Executable + README: compile instructions in README.md; compile to create executable.
-
-Compile:
-  g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o movie_booking
-Run:
-  ./movie_booking       (Linux/macOS)
-  movie_booking.exe     (Windows)
-*/
 
 #include <algorithm>
 #include <fstream>
@@ -39,7 +16,7 @@ static const string MOVIE_FILE = "movies.txt";
 static const string BOOKING_FILE = "bookings.txt";
 
 string cleanField(string value) {
-    // Keep the pipe character as a file delimiter out of saved fields.
+    
     replace(value.begin(), value.end(), '|', '/');
     return value;
 }
@@ -116,7 +93,7 @@ public:
     }
 };
 
-// Abstract base class: demonstrates inheritance and runtime polymorphism.
+
 class User {
 protected:
     int id_;
@@ -168,7 +145,7 @@ private:
     string customerName_;
     int tickets_;
     int totalAmount_;
-    string status_; // CONFIRMED or CANCELLED
+    string status_; 
 
 public:
     Booking() : id_(0), movieId_(0), tickets_(0), totalAmount_(0), status_("CONFIRMED") {}
@@ -219,7 +196,7 @@ public:
 
 class MovieBookingSystem {
 private:
-    vector<unique_ptr<Movie>> movies_; // Dynamic memory managed safely.
+    vector<unique_ptr<Movie>> movies_; 
     vector<Booking> bookings_;
     unique_ptr<User> currentUser_;
     int nextMovieId_ = 1;
@@ -465,7 +442,7 @@ private:
 
     void customerMenu() {
         currentUser_.reset(new Customer(1, "Guest Customer"));
-        // Polymorphic call through base-class pointer.
+        
         currentUser_->displayProfile();
         int option;
         do {
